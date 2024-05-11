@@ -921,6 +921,7 @@ namespace Loyc.Math
 
 		public T Floor(T a)               { return (T)System.Math.Floor(a); }
 		public T Ceiling(T a)             { return (T)System.Math.Ceiling(a); }
+		public T Round(T a)			      { return (T)System.Math.Round(a); }
 
 
 		#endregion
@@ -1042,6 +1043,7 @@ namespace Loyc.Math
 
 		public T Floor(T a)               { return (T)System.Math.Floor(a); }
 		public T Ceiling(T a)             { return (T)System.Math.Ceiling(a); }
+		public T Round(T a)			      { return (T)System.Math.Round(a); }
 
 
 		#endregion
@@ -1163,6 +1165,7 @@ namespace Loyc.Math
 
 		public T Floor(T a)               { return a.Floor(); }
 		public T Ceiling(T a)             { return a.Ceiling(); }
+		public T Round(T a)			      { return a.Round(); }
 
 
 		#endregion
@@ -1272,6 +1275,7 @@ namespace Loyc.Math
 
 		public T Floor(T a)               { return a.Floor(); }
 		public T Ceiling(T a)             { return a.Ceiling(); }
+		public T Round(T a)			      { return a.Round(); }
 
 
 		#endregion
@@ -1381,6 +1385,7 @@ namespace Loyc.Math
 
 		public T Floor(T a)               { return a.Floor(); }
 		public T Ceiling(T a)             { return a.Ceiling(); }
+		public T Round(T a)			      { return a.Round(); }
 
 
 		#endregion
@@ -1490,6 +1495,7 @@ namespace Loyc.Math
 
 		public T Floor(T a)               { return a.Floor(); }
 		public T Ceiling(T a)             { return a.Ceiling(); }
+		public T Round(T a)			      { return a.Round(); }
 
 
 		#endregion
@@ -1599,6 +1605,7 @@ namespace Loyc.Math
 
 		public T Floor(T a)               { return a.Floor(); }
 		public T Ceiling(T a)             { return a.Ceiling(); }
+		public T Round(T a)			      { return a.Round(); }
 
 
 		#endregion
