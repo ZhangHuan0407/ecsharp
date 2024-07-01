@@ -301,7 +301,13 @@ namespace Loyc.Math
 		public static <#=T#> operator --(<#=T#> a) { a.N -= Unit; return a; }
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public <#=T#> Abs() { return Prescaled(N >= 0 ? N : -N); }
+		public <#=T#> Abs()
+		{
+			<#=T.Int#> valueN = N;
+			if (valueN == MinValue.N)
+				valueN = MaxValue.N;
+			return Prescaled(valueN >= 0 ? valueN : -valueN);
+		}
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public <#=T#> Floor() { return Prescaled(N & ~Mask); }

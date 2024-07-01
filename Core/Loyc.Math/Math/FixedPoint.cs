@@ -296,7 +296,13 @@ namespace Loyc.Math
 		public static FPI8 operator --(FPI8 a) { a.N -= Unit; return a; }
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public FPI8 Abs() { return Prescaled(N >= 0 ? N : -N); }
+		public FPI8 Abs()
+		{
+			Int32 valueN = N;
+			if (valueN == MinValue.N)
+				valueN = MaxValue.N;
+			return Prescaled(valueN >= 0 ? valueN : -valueN);
+		}
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public FPI8 Floor() { return Prescaled(N & ~Mask); }
@@ -699,7 +705,13 @@ namespace Loyc.Math
 		public static FPI16 operator --(FPI16 a) { a.N -= Unit; return a; }
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public FPI16 Abs() { return Prescaled(N >= 0 ? N : -N); }
+		public FPI16 Abs()
+		{
+			Int32 valueN = N;
+			if (valueN == MinValue.N)
+				valueN = MaxValue.N;
+			return Prescaled(valueN >= 0 ? valueN : -valueN);
+		}
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public FPI16 Floor() { return Prescaled(N & ~Mask); }
@@ -1096,7 +1108,13 @@ namespace Loyc.Math
 		public static FPI23 operator --(FPI23 a) { a.N -= Unit; return a; }
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public FPI23 Abs() { return Prescaled(N >= 0 ? N : -N); }
+		public FPI23 Abs()
+		{
+			Int32 valueN = N;
+			if (valueN == MinValue.N)
+				valueN = MaxValue.N;
+			return Prescaled(valueN >= 0 ? valueN : -valueN);
+		}
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public FPI23 Floor() { return Prescaled(N & ~Mask); }
@@ -1502,7 +1520,13 @@ namespace Loyc.Math
 		public static FPL16 operator --(FPL16 a) { a.N -= Unit; return a; }
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public FPL16 Abs() { return Prescaled(N >= 0 ? N : -N); }
+		public FPL16 Abs()
+		{
+			Int64 valueN = N;
+			if (valueN == MinValue.N)
+				valueN = MaxValue.N;
+			return Prescaled(valueN >= 0 ? valueN : -valueN);
+		}
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public FPL16 Floor() { return Prescaled(N & ~Mask); }
@@ -1910,7 +1934,13 @@ namespace Loyc.Math
 		public static FPL32 operator --(FPL32 a) { a.N -= Unit; return a; }
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public FPL32 Abs() { return Prescaled(N >= 0 ? N : -N); }
+		public FPL32 Abs()
+		{
+			Int64 valueN = N;
+			if (valueN == MinValue.N)
+				valueN = MaxValue.N;
+			return Prescaled(valueN >= 0 ? valueN : -valueN);
+		}
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public FPL32 Floor() { return Prescaled(N & ~Mask); }
