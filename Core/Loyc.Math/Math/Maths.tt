@@ -1,4 +1,4 @@
-﻿//
+//
 // Math operation structures produced with the help of T4 (Maths.tt)
 // NOTE: THIS CODE HAS NOT BEEN WELL-TESTED AND DOES NOT YET HAVE A TEST SUITE.
 // 
@@ -12,6 +12,7 @@ using System.Collections.Generic;
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = <#=T.QualifiedName#>;
 
 	/// <summary>Implements <see cref="<#=T.InterfacesXmlDoc#>"/> for numbers of type <#=T.QualifiedName#>.</summary>
@@ -48,9 +49,21 @@ namespace Loyc.Math
 		public T Ceiling(T a)             { return (T)System.Math.Ceiling(a); }
 		public T Round(T a)			      { return (T)System.Math.Round(a); }
 <#		} else { #>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Floor(T a)               { return a.Floor(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Ceiling(T a)             { return a.Ceiling(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Round(T a)			      { return a.Round(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public T Lerp(T a, T b, T t)
+		{
+			if (t > T.One)
+			    t = T.One;
+			else if (t < T.Zero)
+				t = T.Zero;
+			return (b - a) * t + a;
+		}
 <#		} #>
 
 		#endregion

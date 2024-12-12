@@ -1,4 +1,4 @@
-﻿//
+//
 // Math operation structures produced with the help of T4 (Maths.tt)
 // NOTE: THIS CODE HAS NOT BEEN WELL-TESTED AND DOES NOT YET HAVE A TEST SUITE.
 // 
@@ -14,6 +14,7 @@ using System.Collections.Generic;
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = System.SByte;
 
 	/// <summary>Implements <see cref="IIntMath{T}"/> for numbers of type System.SByte.</summary>
@@ -125,6 +126,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = System.Byte;
 
 	/// <summary>Implements <see cref="IUIntMath{T}"/> for numbers of type System.Byte.</summary>
@@ -233,6 +235,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = System.Int16;
 
 	/// <summary>Implements <see cref="IIntMath{T}"/> for numbers of type System.Int16.</summary>
@@ -344,6 +347,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = System.UInt16;
 
 	/// <summary>Implements <see cref="IUIntMath{T}"/> for numbers of type System.UInt16.</summary>
@@ -452,6 +456,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = System.Int32;
 
 	/// <summary>Implements <see cref="IIntMath{T}"/> for numbers of type System.Int32.</summary>
@@ -563,6 +568,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = System.UInt32;
 
 	/// <summary>Implements <see cref="IUIntMath{T}"/> for numbers of type System.UInt32.</summary>
@@ -671,6 +677,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = System.Int64;
 
 	/// <summary>Implements <see cref="IIntMath{T}"/> for numbers of type System.Int64.</summary>
@@ -782,6 +789,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = System.UInt64;
 
 	/// <summary>Implements <see cref="IUIntMath{T}"/> for numbers of type System.UInt64.</summary>
@@ -890,6 +898,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = System.Single;
 
 	/// <summary>Implements <see cref="IFloatMath{T}"/> for numbers of type System.Single.</summary>
@@ -1012,6 +1021,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = System.Double;
 
 	/// <summary>Implements <see cref="IFloatMath{T}"/> for numbers of type System.Double.</summary>
@@ -1134,6 +1144,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = FPI8;
 
 	/// <summary>Implements <see cref="IRationalMath{T}"/> for numbers of type FPI8.</summary>
@@ -1163,9 +1174,21 @@ namespace Loyc.Math
 		public T One        { get { return FPI8.One; } }
 
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Floor(T a)               { return a.Floor(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Ceiling(T a)             { return a.Ceiling(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Round(T a)			      { return a.Round(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public T Lerp(T a, T b, T t)
+		{
+			if (t > T.One)
+			    t = T.One;
+			else if (t < T.Zero)
+				t = T.Zero;
+			return (b - a) * t + a;
+		}
 
 
 		#endregion
@@ -1244,6 +1267,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = FPI16;
 
 	/// <summary>Implements <see cref="IRationalMath{T}"/> for numbers of type FPI16.</summary>
@@ -1273,9 +1297,21 @@ namespace Loyc.Math
 		public T One        { get { return FPI16.One; } }
 
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Floor(T a)               { return a.Floor(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Ceiling(T a)             { return a.Ceiling(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Round(T a)			      { return a.Round(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public T Lerp(T a, T b, T t)
+		{
+			if (t > T.One)
+			    t = T.One;
+			else if (t < T.Zero)
+				t = T.Zero;
+			return (b - a) * t + a;
+		}
 
 
 		#endregion
@@ -1354,6 +1390,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = FPI23;
 
 	/// <summary>Implements <see cref="IRationalMath{T}"/> for numbers of type FPI23.</summary>
@@ -1383,9 +1420,21 @@ namespace Loyc.Math
 		public T One        { get { return FPI23.One; } }
 
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Floor(T a)               { return a.Floor(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Ceiling(T a)             { return a.Ceiling(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Round(T a)			      { return a.Round(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public T Lerp(T a, T b, T t)
+		{
+			if (t > T.One)
+			    t = T.One;
+			else if (t < T.Zero)
+				t = T.Zero;
+			return (b - a) * t + a;
+		}
 
 
 		#endregion
@@ -1464,6 +1513,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = FPL16;
 
 	/// <summary>Implements <see cref="IRationalMath{T}"/> for numbers of type FPL16.</summary>
@@ -1493,9 +1543,21 @@ namespace Loyc.Math
 		public T One        { get { return FPL16.One; } }
 
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Floor(T a)               { return a.Floor(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Ceiling(T a)             { return a.Ceiling(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Round(T a)			      { return a.Round(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public T Lerp(T a, T b, T t)
+		{
+			if (t > T.One)
+			    t = T.One;
+			else if (t < T.Zero)
+				t = T.Zero;
+			return (b - a) * t + a;
+		}
 
 
 		#endregion
@@ -1574,6 +1636,7 @@ namespace Loyc.Math
 namespace Loyc.Math
 {
 	using System;
+	using System.Runtime.CompilerServices;
 	using T = FPL32;
 
 	/// <summary>Implements <see cref="IRationalMath{T}"/> for numbers of type FPL32.</summary>
@@ -1603,9 +1666,21 @@ namespace Loyc.Math
 		public T One        { get { return FPL32.One; } }
 
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Floor(T a)               { return a.Floor(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Ceiling(T a)             { return a.Ceiling(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public T Round(T a)			      { return a.Round(); }
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public T Lerp(T a, T b, T t)
+		{
+			if (t > T.One)
+			    t = T.One;
+			else if (t < T.Zero)
+				t = T.Zero;
+			return (b - a) * t + a;
+		}
 
 
 		#endregion
