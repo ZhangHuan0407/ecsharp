@@ -5,16 +5,19 @@ namespace Loyc.Math
 {
     public static class FPL16TriangleFunctionExtension
     {
-        public const long PI_Prescaled = 205887;
-        // double: 3.1415926, fp: 3.9279
-        public static readonly FPL16 PI = FPL16.Prescaled(205887);
-        public static readonly FPL16 PI2 = PI * 2L;
-        public static readonly FPL16 TUO = PI / 2L;
+		private const long PI_Prescaled = 205887;
+		internal static readonly FPL16 PI = FPL16.Prescaled(205887);
+		internal static readonly FPL16 PI2 = PI * 2L;
+		private static readonly FPL16 TUO = PI / 2L;
 
-        // double: 2.718281828, fp: 2.47073
-        public static readonly FPL16 E = FPL16.Prescaled(178145);
-        // 0.001
-        private const long Interval_Prescaled = 66;
+		/// <summary>
+		/// double: 2.718281828, fp: 2 + 47073/65536
+		/// </summary>
+		private static readonly FPL16 E = FPL16.Prescaled(178145);
+		/// <summary>
+		/// 0.001
+		/// </summary>
+		internal const long Interval_Prescaled = 66;
         private static readonly long[] SinFactorialTable;
         private static readonly long[] ArcSinFactorialTable;
 
