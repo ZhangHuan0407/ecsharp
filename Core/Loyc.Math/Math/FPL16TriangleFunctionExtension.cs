@@ -21,11 +21,11 @@ namespace Loyc.Math
         private static readonly long[] SinFactorialTable;
         private static readonly long[] ArcSinFactorialTable;
 
-        private static readonly FPL16 _0_93 = FPL16.Prescaled(60948);
-        private static readonly FPL16 _1_649047 = FPL16.Prescaled(108072);
-        private static readonly FPL16 _0_14083 = FPL16.Prescaled(9229);
-        private static readonly FPL16 _0_86 = FPL16.Prescaled(56361);
-        private static readonly FPL16 _0_02 = FPL16.Prescaled(1311);
+		private static readonly FPL16 _0_94 = FPL16.Prescaled(61604);
+		private static readonly FPL16 _0_93 = FPL16.Prescaled(60948);
+		private static readonly FPL16 _0_025 = FPL16.Prescaled(1638);
+		private static readonly FPL16 _0_86 = FPL16.Prescaled(56361);
+        private static readonly FPL16 _0_023 = FPL16.Prescaled(1507);
 
         static FPL16TriangleFunctionExtension()
         {
@@ -90,8 +90,11 @@ namespace Loyc.Math
             return math.Sin(round) / math.Cos(round);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static FPL16 ArcSin(this MathFPL16 math, FPL16 value, bool precisionCompensation = false)
+		/// <summary>
+		/// [-Π/2, Π/2]
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static FPL16 ArcSin(this MathFPL16 math, FPL16 value)
         {
             bool minus = value.N < 0;
             if (value == FPL16.MinValue)
@@ -110,18 +113,16 @@ namespace Loyc.Math
                 taylorExpansion.N += delta;
             } while (++circleTimes < 5 && (delta > 0 ? delta : -delta) > Interval_Prescaled);
 
-            if (precisionCompensation)
+            if (value.N > _0_93.N)
+			{
+				long deltaN = value.N - _0_94.N;
+				taylorExpansion.N += deltaN * deltaN / 1630 + _0_025.N;
+				if (taylorExpansion.N > TUO.N)
+					taylorExpansion.N = TUO.N;
+			}
+            else if (value.N > _0_86.N)
             {
-                if (value.N > _0_93.N)
-                {
-                    taylorExpansion.N += (_1_649047.N * math.Ln(value).N >> 16) + _0_14083.N;
-                    if (taylorExpansion.N > TUO.N)
-                        taylorExpansion.N = TUO.N;
-                }
-                else if (value.N > _0_86.N)
-                {
-                    taylorExpansion.N += (value.N - _0_86.N) * _0_02.N / (_0_93.N - _0_86.N);
-                }
+                taylorExpansion.N += (value.N - _0_86.N) * _0_023.N / (_0_93.N - _0_86.N);
             }
             if (minus)
                 taylorExpansion.N = -taylorExpansion.N;
@@ -135,7 +136,10 @@ namespace Loyc.Math
             return result;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+		/// <summary>
+		/// [-Π, Π]
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FPL16 ArcTan2(this MathFPL16 math, FPL16 y, FPL16 x)
         {
             bool smallX = x.N > -Interval_Prescaled && x.N < Interval_Prescaled;
@@ -152,7 +156,15 @@ namespace Loyc.Math
             FPL16 q = FPL16.Zero;
             q.N = (y.N * y.N + x.N * x.N) >> 16;
             FPL16 sin = math.Div(y, math.Sqrt(q));
-            return ArcSin(math, sin, true);
+			FPL16 radius = ArcSin(math, sin);
+			if (x < FPL16.Zero)
+			{
+				if (y > FPL16.Zero)
+					radius = PI - radius;
+				else
+					radius = -PI - radius;
+			}
+			return radius;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
